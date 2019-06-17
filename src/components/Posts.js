@@ -1,72 +1,92 @@
 import React, { Component}  from 'react'
-import { fetchMainPost } from '../utils/api'
-
+import { fetchMainPosts } from '../utils/api'
 import PropTypes from 'prop-types'
 
+
+
+function AllPosts ({ selected, onUpdatePost }) {
+    const storyOptions = [ 'top', 'new' ]
+    return (
+        <li>
+            <ul className='flex-center'>
+                    {storyOptions.map((storyOption)=> (
+                        <li key={storyOption}>
+                             <button
+                              className='btn-clear'
+                              style={storyOption === selected ? {color: 'rgb(255, 105, 180 )'} : null}
+                              onClick={()=> onUpdatePost(storyOption)}>
+                                {storyOption}
+                            </button>   
+                        </li>
+                    ))}
+                </ul> 
+        </li>
+    )
+}
+
+AllPosts.propTypes = {
+    selected: PropTypes.string.isRequired,
+    onUpdatePost: PropTypes.func.isRequired
+
+}
+
+
+//new component will hold my logic
 class Posts extends Component {
-
-    
-
     state = {
-        selectedPost: 'top',
+        selectedPost: 'new',
         error: null,
-        loading: false
+        type: null
+       
+        
+    }
+
+    componentDidMount () {
+        this.updatePost(this.state.selectedPost)
     }
 
 
     updatePost = (selectedPost) => {
         this.setState({
             selectedPost,
-            error: null
-        })
-
-        fetchMainPost(this.props.type)
-        .then((selectedPost) => this.setState({
-            selectedPost,
             error: null,
-        }))
-        .catch(() => {
-            console.warn('error fetching stories: ' )
-
-
-            this.setState({
-                error: 'There was an error getting your stories' 
-            })
+                     
         })
-    }
 
+
+        fetchMainPosts(selectedPost)
+            .then((type) => this.setState({
+                type,
+                error: null
+            }))
+            .catch(() => {
+                console.warn('there was an error fetching your stories')
+            })
+
+    }
 
 
     isLoading= () => {
-        return this.state.selectedPost == null && this.state.error == null
+        return this.state.type == null && this.state.error == null
 
     }
-
     render () {
-        const posts = ['top', 'new']
+        //destructing 
 
         return (
             <div>
-                <ul className='flex-center'>
-                    {posts.map((post)=> (
-                        <li key={post}>
-                             <button
-                              className='btn-clear'
-                              style={post === this.state.selectedPost ? {color: 'rgb(187, 46, 31 )'} : null}
-                              onClick={()=> this.updatePost(post)}>
-
-                                {post}
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-
+                <AllPosts 
+                    selected = {this.state.selectedPost}
+                    onUpdatePost ={this.updatePost}
+                />
                 {this.isLoading() && <p>Loading</p> }
 
                 {this.state.error && <p>{this.state.error} </p>}
+                
 
-                { this.state.selectedPost && <pre>{JSON.stringify(this.state.selectedPost, null, 2)}</pre> }
-                   
+                { this.state.type && <pre>{JSON.stringify(this.state.type, null, 2)}</pre> }
+
+        
             </div>
 
         )

@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 
+
 import Posts from './components/Posts';
 
 // import Nav from './components/navigation/Nav'
