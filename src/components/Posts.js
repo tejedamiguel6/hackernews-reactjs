@@ -30,15 +30,38 @@ AllPosts.propTypes = {
 
 }
 
+function AllPostList ({ types, href }) {
+    // const {title, by, score, time, url, text} = types
+    return (
+            <ul className='post-container'>
+                {types.map((type)=> {
+                    return (
+                        <React.Fragment>
+                            <li className='title-list'>
+                                <a className='title' href={type.url} > {type.title}</a>
+                            </li>
+                        
+                            <li className='post-from'> 
+                                By:  <a href={type.by} > {type.by} </a>on {type.time}
+                             </li>
+                        </React.Fragment>   
+                    )
+                })}
+            </ul>       
+    )  
+}
 
-//new component will hold my logic
+AllPostList.propTypes = {
+    types: PropTypes.array.isRequired
+
+}
+
+
 class Posts extends Component {
     state = {
-        selectedPost: 'new',
+        selectedPost: 'top',
         error: null,
-        type: null
-       
-        
+        types: {}
     }
 
     componentDidMount () {
@@ -49,50 +72,57 @@ class Posts extends Component {
     updatePost = (selectedPost) => {
         this.setState({
             selectedPost,
-            error: null,
-                     
+            error: null,         
         })
 
+        if(!this.state.types[selectedPost]){
+            fetchMainPosts(selectedPost)
+                .then((data)=> {
+                    this.setState(({ types }) => ({
+                        types: {
+                            ...types,
+                            [selectedPost]: data
 
-        fetchMainPosts(selectedPost)
-            .then((type) => this.setState({
-                type,
-                error: null
-            }))
-            .catch(() => {
-                console.warn('there was an error fetching your stories')
-            })
+                        }
+                    }))
+                })
 
+                .catch(() => {
+                    console.warn('there was an error fetching your stories')
+    
+                this.setState({
+                    error: 'There was an error fetching sotries'
+                })
+             })
+        }
     }
 
 
     isLoading= () => {
-        return this.state.type == null && this.state.error == null
+        const { types, selectedPost, error } = this.state
+
+        return !types[selectedPost] && error === null
 
     }
+    
     render () {
         //destructing 
+        const { types, error, selectedPost } = this.state
 
         return (
             <div>
                 <AllPosts 
-                    selected = {this.state.selectedPost}
+                    selected = { selectedPost}
                     onUpdatePost ={this.updatePost}
                 />
                 {this.isLoading() && <p>Loading</p> }
 
-                {this.state.error && <p>{this.state.error} </p>}
-                
-
-                { this.state.type && <pre>{JSON.stringify(this.state.type, null, 2)}</pre> }
-
-        
+                {error && <p>{error} </p>}
+            
+                { types[selectedPost] && <AllPostList types={types[selectedPost]} href={types[selectedPost]}/> }        
             </div>
-
         )
     }
-
-    
 }
 
 Posts.propTypes = {
@@ -100,10 +130,4 @@ Posts.propTypes = {
 }
 
 
-
-
-
-
-
 export default Posts
-

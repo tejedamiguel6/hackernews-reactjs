@@ -4,14 +4,12 @@ html, body, #app {
   width: 100%;
 }
 
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 50px;
 
 }
-
 
 body {
   
@@ -23,19 +21,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 ul {
   padding: 10px;
 }
-
 
 li {
   list-style-type: none;
   font-weight: bold;
   font-size: 20px;
 }
-
-
 
 .nav li {
   margin-right: 20px;
@@ -55,7 +49,6 @@ li {
 
 }
 
-
 .btn-clear {
   background: transparent;
   padding: 15px;
@@ -73,3 +66,24 @@ li {
 
 }
 
+.post-container {
+  /* background: rgb(255, 105, 190) ; */
+  border-radius: 15px;
+
+}
+
+.title {
+  text-decoration: none;
+  list-style-type: none;
+  font-size: 22px;
+  color: rgb(139, 0, 0);
+  /* color: rgb(0,249,255); */
+}
+
+.title-list {
+  padding: 15px;
+}
+
+.post-from {
+  font-size: 15px;
+}

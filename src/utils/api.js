@@ -2,14 +2,14 @@ const api = `https://hacker-news.firebaseio.com/v0/`
 const json = `.json?print=pretty`
 
 
-// function removeDead (posts) {
-//     return posts.filter(Boolean).filter (({ dead }) => dead !== true)
-// }
+function removeDead (posts) {
+    return posts.filter(Boolean).filter (({ dead }) => dead !== true)
+}
 
 
-// function removeDeleted(posts) {
-//     return posts.filter(({ deleted }) => deleted !== true )
-// } 
+function removeDeleted(posts) {
+    return posts.filter(({ deleted }) => deleted !== true )
+} 
 
 
 
@@ -18,9 +18,9 @@ const json = `.json?print=pretty`
 // }
 
 
-// function onlyPosts (posts){
-//     return posts.filter(({ type }) => 'story')
-// }
+function onlyPosts (posts){
+    return posts.filter(({ type }) => 'story')
+}
 
 
 
@@ -50,34 +50,12 @@ export function fetchMainPosts (type) {
             if(!ids) {
                 throw new Error(`There was an error fetching the ${type} stories`)
             }
-            return ids.slice(0, 55)
+            return ids.slice(0, 50)
 
         })
         .then((ids) => Promise.all(ids.map(fetchItem)))
-        // .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
+        .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
 
     }
 
 
-
-
-
-
-
-
-
-
-
-//getting the item of the id because HN treats every item as an id
-// export function getItemById(id) {
-//     return fetch ((`${api}/item/${id}.json`))
-//         .then((data) => data.json)
-// }
-
-
-
-
-// function deletedItems (arrayOfItemsPromise) {
-//     return Promise.all(arrayOfItemsPromise)
-//     .then((data) => data.filter(item => !item.deleted))
-// }
