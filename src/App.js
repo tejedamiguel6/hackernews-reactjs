@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-
+import User from './components/User'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Posts from './components/Posts';
 
@@ -11,25 +12,21 @@ import Posts from './components/Posts';
 
 function App() {
   return (
-    <div className="App">
+
     
-      {/* <Nav /> */}
-      <div className='container'>
-        <Posts />
+      <div className="App">
+        <div className='container'>
+          <Posts />
+          
+
+
       
-      
-      
-      
+        </div>
       </div>
-
-      
-
-
-
-
-
-      
-    </div>
+  
+   
+     
+    
   );
 }
 

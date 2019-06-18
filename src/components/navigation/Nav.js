@@ -1,21 +1,43 @@
 // import React from 'react'
+// // import Posts from '../Posts'
+// // import { NavLink } from 'react-router-dom'
 
 
 // function Nav () {
 //     return (
 //         <div>
-//             <nav className='row space-between'>
-//                 <ul className='row nav'>
+//             {/* <nav>
+//                 <ul>
 //                     <li>
-//                         Top
+//                         <NavLink 
+//                         to='/'
+//                         exact
+//                         className='nav-link'>
+//                             topsssd
+//                         </NavLink>
 //                     </li>
 
 //                     <li>
-//                         New
+//                         <NavLink
+//                         to='/new'
+//                         exact
+//                         className='nav-link'>
+//                             new
+//                         </NavLink>
+
 //                     </li>
+
+
+
+
+
 //                 </ul>
-//             </nav>
-//     </div>
+
+
+
+//             </nav> */}
+            
+//         </div>
 //     )
 // }
 

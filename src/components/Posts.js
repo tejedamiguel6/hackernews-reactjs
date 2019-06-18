@@ -1,60 +1,9 @@
 import React, { Component}  from 'react'
 import { fetchMainPosts } from '../utils/api'
 import PropTypes from 'prop-types'
+import AllPosts from './AllPosts'
+import AllPostList from './AllPostList'
 
-
-
-function AllPosts ({ selected, onUpdatePost }) {
-    const storyOptions = [ 'top', 'new' ]
-    return (
-        <li>
-            <ul className='flex-center'>
-                    {storyOptions.map((storyOption)=> (
-                        <li key={storyOption}>
-                             <button
-                              className='btn-clear'
-                              style={storyOption === selected ? {color: 'rgb(255, 105, 180 )'} : null}
-                              onClick={()=> onUpdatePost(storyOption)}>
-                                {storyOption}
-                            </button>   
-                        </li>
-                    ))}
-                </ul> 
-        </li>
-    )
-}
-
-AllPosts.propTypes = {
-    selected: PropTypes.string.isRequired,
-    onUpdatePost: PropTypes.func.isRequired
-
-}
-
-function AllPostList ({ types, href }) {
-    // const {title, by, score, time, url, text} = types
-    return (
-            <ul className='post-container'>
-                {types.map((type)=> {
-                    return (
-                        <React.Fragment>
-                            <li className='title-list'>
-                                <a className='title' href={type.url} > {type.title}</a>
-                            </li>
-                        
-                            <li className='post-from'> 
-                                By:  <a href={type.by} > {type.by} </a>on {type.time}
-                             </li>
-                        </React.Fragment>   
-                    )
-                })}
-            </ul>       
-    )  
-}
-
-AllPostList.propTypes = {
-    types: PropTypes.array.isRequired
-
-}
 
 
 class Posts extends Component {
@@ -67,7 +16,6 @@ class Posts extends Component {
     componentDidMount () {
         this.updatePost(this.state.selectedPost)
     }
-
 
     updatePost = (selectedPost) => {
         this.setState({
@@ -97,10 +45,8 @@ class Posts extends Component {
         }
     }
 
-
     isLoading= () => {
         const { types, selectedPost, error } = this.state
-
         return !types[selectedPost] && error === null
 
     }
@@ -108,7 +54,6 @@ class Posts extends Component {
     render () {
         //destructing 
         const { types, error, selectedPost } = this.state
-
         return (
             <div>
                 <AllPosts 
