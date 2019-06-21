@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 
 
 
@@ -8,7 +7,7 @@ class User extends Component {
         return (
             <div>
 
-                <p>User profile</p>
+                <h1>This is where the users profile will load</h1>
             </div>
         )
     }

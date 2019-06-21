@@ -1,70 +1,57 @@
 import React, { Component}  from 'react'
 import { fetchMainPosts } from '../utils/api'
 import PropTypes from 'prop-types'
-import AllPosts from './AllPosts'
 import AllPostList from './AllPostList'
-
 
 
 class Posts extends Component {
     state = {
-        selectedPost: 'top',
+        Loading: false,
         error: null,
-        types: {}
+        types: {},
+        posts: null
     }
 
     componentDidMount () {
-        this.updatePost(this.state.selectedPost)
+        this.updatePost(this.state.posts)
     }
 
-    updatePost = (selectedPost) => {
+    updatePost = (posts) => {
         this.setState({
-            selectedPost,
-            error: null,         
+            posts: null,
+            error: null,
         })
+        fetchMainPosts(this.props.type)
+            .then((data)=> {
+                this.setState(({ types }) => ({
+                    types: {
+                        ...types,
+                        [posts]: data
+                    }
+                }))
+            })
 
-        if(!this.state.types[selectedPost]){
-            fetchMainPosts(selectedPost)
-                .then((data)=> {
-                    this.setState(({ types }) => ({
-                        types: {
-                            ...types,
-                            [selectedPost]: data
+            .catch(() => {
 
-                        }
-                    }))
-                })
-
-                .catch(() => {
-                    console.warn('there was an error fetching your stories')
-    
-                this.setState({
-                    error: 'There was an error fetching sotries'
-                })
-             })
-        }
+            console.warn('there was an error fetching your stories')
+            this.setState({
+                error: 'There was an error fetching sotries'
+            })
+        })
     }
-
     isLoading= () => {
-        const { types, selectedPost, error } = this.state
-        return !types[selectedPost] && error === null
-
+        const { types, posts, error } = this.state
+        return !types[posts] && error === null
     }
-    
     render () {
-        //destructing 
-        const { types, error, selectedPost } = this.state
+        //destructing
+        const { types, error, posts } = this.state
         return (
             <div>
-                <AllPosts 
-                    selected = { selectedPost}
-                    onUpdatePost ={this.updatePost}
-                />
+                 { types[posts] && <AllPostList posts={types[posts]} /> } 
+                {/* <AllPosts selected={posts} onUpdatePost={this.updatePost} /> */}
                 {this.isLoading() && <p>Loading</p> }
-
                 {error && <p>{error} </p>}
-            
-                { types[selectedPost] && <AllPostList types={types[selectedPost]} href={types[selectedPost]}/> }        
             </div>
         )
     }
@@ -72,7 +59,7 @@ class Posts extends Component {
 
 Posts.propTypes = {
     type: PropTypes.oneOf(['top', 'new'])
-}
+  }
 
-
+ 
 export default Posts

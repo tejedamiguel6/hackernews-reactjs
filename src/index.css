@@ -87,3 +87,14 @@ li {
 .post-from {
   font-size: 15px;
 }
+
+.top-new {
+  padding: 15px;
+  cursor: pointer;
+  letter-spacing: .9em;
+  border: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}

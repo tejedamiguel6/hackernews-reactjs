@@ -1,48 +1,37 @@
-// import React from 'react'
-// // import Posts from '../Posts'
-// // import { NavLink } from 'react-router-dom'
+import React from  'react'
+import { NavLink } from 'react-router-dom'
 
 
-// function Nav () {
-//     return (
-//         <div>
-//             {/* <nav>
-//                 <ul>
-//                     <li>
-//                         <NavLink 
-//                         to='/'
-//                         exact
-//                         className='nav-link'>
-//                             topsssd
-//                         </NavLink>
-//                     </li>
+const activeStyle = {
+    color: 'red'
+}
 
-//                     <li>
-//                         <NavLink
-//                         to='/new'
-//                         exact
-//                         className='nav-link'>
-//                             new
-//                         </NavLink>
+function Nav () {
+    return (
+        <nav>
+           <ul className='flex-center'>
+                <li >
+                    <NavLink
+                        to='/'
+                        activeStyle={activeStyle}
+                        exact
+                        className='top-new'>
+                        Top
+                    </NavLink>
+                </li>
 
-//                     </li>
+                <li>
+                    <NavLink
+                       to ='/new'
+                       activeStyle={activeStyle}
+                       className='top-new'>
+                        New
+                    </NavLink>
+                </li>
+            </ul>
+        </nav>
+    )
 
+}
 
-
-
-
-//                 </ul>
-
-
-
-//             </nav> */}
-            
-//         </div>
-//     )
-// }
-
-
-
-
-// export default Nav;
-
+export default Nav;
