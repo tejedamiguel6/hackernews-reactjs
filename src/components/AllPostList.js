@@ -1,19 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function AllPostList ({ posts }) {
-    // const {title, by, score, time, url, text} = posts
+
+import { Link } from 'react-router-dom'
+
+function AllPostList ({ posts, id, by, descendants }) {
     return (
             <ul className='post-container'>
                 {posts.map((post)=> {
                     return (
                         <React.Fragment>
+
+                    
+
                             <li key={post} className='title-list'>
                                 <a className='title' href={post.url } > {post.title}</a>
                             </li>
-                            <li className='post-from'>
-                                By:  <a href={post.by} > {post.by} </a>on {post.time}
-                             </li>
+
+
+                         
+                         <span className='spanLink'>by: <Link to={`/user?id=${post.by}`}>{post.by}</Link></span>
+                         <span> on {post.time}</span>
+
+                         <span>
+                            with <Link to={`/post?id=${post.id}`}>{post.descendants}</Link> comments
+                            </span>
                         </React.Fragment>  
                     )
                 })}
@@ -28,3 +39,6 @@ AllPostList.propTypes = {
 
 
 export default AllPostList
+
+
+

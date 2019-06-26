@@ -12,23 +12,21 @@ function removeDeleted(posts) {
 } 
 
 
-
-// function OnlyComments (posts) {
-//     return posts.filter(({ type }) => type === 'comment')
-// }
+function OnlyComments (posts) {
+    return posts.filter(({ type }) => type === 'comment')
+}
 
 
 function onlyPosts (posts){
-    return posts.filter(({ type }) => 'story')
+    return posts.filter(({ type }) => type === 'story')
 }
 
 
 
-
-// export function fetchComments (ids) {
-//     return Promise.all(ids.map(fetchItem))
-//         .then((comments) => removeDeleted(OnlyComments(removeDead(comments))))
-// }
+export function fetchComments (ids) {
+    return Promise.all(ids.map(fetchItem))
+        .then((comments) => removeDeleted(OnlyComments(removeDead(comments))))
+}
 
 
 
@@ -40,6 +38,24 @@ export function fetchItem(id) {
         .then((data) => data.json())
 
 }
+
+
+
+
+//grabing the user name 
+export function getUser(id){
+    return fetch(`${api}/user/${id}/${json}`)
+    .then((data) => data.json())
+}
+
+
+
+
+export function getPost(ids) {
+    return Promise.all(ids.map(fetchItem))
+    .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
+}
+
 
 
 //Grabbing the main post will add this to the main page

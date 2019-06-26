@@ -69,6 +69,7 @@ li {
 .post-container {
   /* background: rgb(255, 105, 190) ; */
   border-radius: 15px;
+  padding: 0;
 
 }
 
@@ -81,11 +82,17 @@ li {
 }
 
 .title-list {
-  padding: 15px;
+  padding: 20px 0 10px 15px;
 }
 
 .post-from {
   font-size: 15px;
+  padding: 0 0 0 20px;
+}
+
+.post-from  a {
+  /* text-decoration: none; */
+  color: black;
 }
 
 .top-new {
@@ -97,4 +104,26 @@ li {
   display: flex;
   align-items: center;
   text-decoration: none;
+}
+
+/* individual users header */
+
+.header {
+  display: flex;
+  margin: 0 auto;
+  padding-left: 20px;
+}
+
+.post {
+  font-size: 50px;
+  padding: 0 0 0 17px;
+}
+
+.spanLink {
+  padding: 0 0 0 20px;
+}
+
+span {
+  padding: 0 0 0 5px;
+
 }
