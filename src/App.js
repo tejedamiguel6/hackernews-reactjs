@@ -5,6 +5,7 @@ import Posts from './components/Posts';
 import Nav from './components/navigation/Nav'
 
 import User from './components/User'
+import Comments from './components/Comments'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             />
           </Switch>
           <Route exact path='/user' component={User} />
+          <Route exact path='/post' component={Comments} />
         </div>
     </Router>
 

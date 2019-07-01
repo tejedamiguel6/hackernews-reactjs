@@ -120,10 +120,17 @@ li {
 }
 
 .spanLink {
-  padding: 0 0 0 20px;
+  padding: 0 0 0 17px;
 }
 
 span {
   padding: 0 0 0 5px;
 
 }
+
+.comment-list {
+  margin: 10px 0;
+  border-radius: 5px;
+  padding: 0 0 0 8px;
+  background:rgba(128, 128, 128, 0.1411764705882353)
+ }

@@ -26,6 +26,7 @@ class Posts extends Component {
         error: null,
         loading: true
       })
+
   
       fetchMainPosts(this.props.type)
         .then((posts) => this.setState({
@@ -33,13 +34,18 @@ class Posts extends Component {
           loading: false,
           error: null
         }))
+
+        .catch(()=> {
+          console.warn('there was an error ')
+        })
+
         .catch(({ message }) => this.setState({
           error: message,
           loading: false
         }))
     }
     render() {
-      const { posts, error, loading } = this.state
+      const {  error, loading, posts } = this.state
   
       if (loading === true) {
         return <p>Loading</p>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { getUser, getPost } from '../utils/api'
 import queryString from 'query-string'
-import PropTypes from 'prop-types'
-
 import AllPostList from '../components/AllPostList'
 
 
@@ -17,6 +15,8 @@ class User extends Component {
         loadingPosts: true,
         error: null,
       }
+
+      
       componentDidMount() {
         const { id } = queryString.parse(this.props.location.search)
     
@@ -26,17 +26,20 @@ class User extends Component {
     
             return getPost(user.submitted.slice(0, 30))
           })
+
           .then((posts) => this.setState({
             posts,
             loadingPosts: false,
             error: null
           }))
+
           .catch(({ message }) => this.setState({
             error: message,
             loadingUser: false,
             loadingPosts: false
           }))
       }
+
       render() {
         const { user, posts, loadingUser, loadingPosts, error } = this.state
     
@@ -73,7 +76,7 @@ class User extends Component {
 
                         {loadingPosts === true ? <p>Rendering posts</p> : 
                     <React.Fragment>
-                        <h2 class='post'>Posts</h2>
+                        <h2 className='post'>Posts</h2>
                         
                         <AllPostList posts ={posts}/>
 

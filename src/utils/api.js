@@ -2,6 +2,7 @@ const api = `https://hacker-news.firebaseio.com/v0/`
 const json = `.json?print=pretty`
 
 
+
 function removeDead (posts) {
     return posts.filter(Boolean).filter (({ dead }) => dead !== true)
 }
@@ -23,20 +24,18 @@ function onlyPosts (posts){
 
 
 
-export function fetchComments (ids) {
-    return Promise.all(ids.map(fetchItem))
-        .then((comments) => removeDeleted(OnlyComments(removeDead(comments))))
+
+//grabbing id of evey post and turing it into readable data
+export function fetchItem (id) {
+  return fetch(`${api}/item/${id}${json}`)
+    .then((res) => res.json())
 }
 
 
 
-
-
-//grabbing id of evey post and turing it into readable data
-export function fetchItem(id) {
-    return fetch(`${api}/item/${id}/${json}`)
-        .then((data) => data.json())
-
+export function fetchComments (ids) {
+    return Promise.all(ids.map(fetchItem))
+        .then((comments) => removeDeleted(OnlyComments(removeDead(comments))))
 }
 
 
