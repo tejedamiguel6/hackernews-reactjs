@@ -1,7 +1,8 @@
-import React, { Component}  from 'react'
+import React, { Component }  from 'react'
 import { fetchMainPosts } from '../utils/api'
 import PropTypes from 'prop-types'
 import AllPostList from './AllPostList'
+import Loading from '../components/Loading'
 
 
 
@@ -48,7 +49,7 @@ class Posts extends Component {
       const {  error, loading, posts } = this.state
   
       if (loading === true) {
-        return <p>Loading</p>
+        return <Loading />
       }
   
       if (error) {

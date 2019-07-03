@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 
 
 
-
 class Comments extends Component {
 
     state = {
@@ -56,7 +55,7 @@ class Comments extends Component {
               {loadingPost === true
                 ? <p>Loading posts</p>
                 : <React.Fragment>
-                    <h1 className='header'>
+                    <h1 className='header title -omment'>
                     {post.title}
                     </h1>
                     <p className='spanLink'>Post By: {post.by} on {post.time} with<Link to={`post?id=${post.id}`}> {post.descendants} </Link>  comments</p> 
@@ -67,6 +66,8 @@ class Comments extends Component {
                 <React.Fragment>
                    <CommentsList comments={comments}/>
                 </React.Fragment>}
+
+                
              
             </React.Fragment>
           )

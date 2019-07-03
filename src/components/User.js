@@ -69,7 +69,7 @@ class User extends Component {
                     </div>
                     
                     <div class='header'>
-                        <p>{user.about}</p>
+                      <p dangerouslySetInnerHTML={{__html: user.about}} />
                     </div>
 
                     <React.Fragment>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 
 function AllPostList ({ posts }) {
+    
     return (
             <ul className='post-container'>
                 {posts.map((post)=> {
